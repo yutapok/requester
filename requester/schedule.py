@@ -55,9 +55,13 @@ class Schedule:
         for q in arr:
             assert isinstance(q, Request), "Invalid data type, source must prepare 'Request'"
 
+            if q.retry_flag and q.retry_num == 0:
+                continue
+
             if q.retry_flag and q.retry_num > 0:
                 logger.warning("retry request, url: '{}', left retry count '{}'".format(q.url, q.retry_num))
-                self.__set_schedule(q)
+
+            self.__set_schedule(q)
 
         if self.run_forever:
             return True

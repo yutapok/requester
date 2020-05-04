@@ -66,24 +66,29 @@ class Fetcher:
             status = None
             headers = None
             body = None
+            req = None
+            if request.method.lower() == "get":
+                req = session.get
+
+            if request.method.lower() == "post":
+                req = session.post
+
+            if request.method.lower() == "put":
+                req = session.put
+
+            if request.method.lower() == "delete":
+                req = session.delete
 
             try:
-                if request.method.lower() == "get":
-                    async with session.get(request.url, data=request.payload) as ares:
-                        status = ares.status
-                        headers = ares.headers
-                        body = await ares.text()
-
-                if request.method.lower() == "post":
-                    async with session.post(request.url, data=request.payload) as ares:
-                        status = ares.status
-                        headers = ares.headers
-                        body = await ares.text()
+                async with req(request.url, data=request.payload) as ares:
+                    status = ares.status
+                    headers = ares.headers
+                    body = await ares.text()
 
 
-                logger.info(json.dumps({'code': status, 'request_method': 'get', 'request_url': request.url}))
+                logger.info(json.dumps({'code': status, 'request_method': request.method.lower(), 'request_url': request.url}))
 
-                if status == 404 or status == 500:
+                if status == 500:
                     request.set_retry()
                 elif status == 200:
                     request.disable_retry()

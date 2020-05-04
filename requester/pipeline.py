@@ -35,7 +35,7 @@ class Pipeline:
             })
 
             logger.error(err_body)
-            return response
+            return None 
 
     async def __aprocessor(self, response):
         try:
@@ -50,7 +50,7 @@ class Pipeline:
             })
 
             logger.error(err_body)
-            return response
+            return None 
 
 
     def flow(self, responses):

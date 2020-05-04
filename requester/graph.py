@@ -39,7 +39,7 @@ class Requester:
             self.async_pipeline = settings.getboolean(section, 'async_pipeline')
 
         self.schedule = schedule or Schedule(ctx=self.ctx, cuncurrent_num=self.concurrent_num)
-        self.fetcher = fetcher or Fetcher(concurrency=self.concurrent_num)
+        self.fetcher = fetcher or Fetcher()
         self.pipeline = pipeline or Pipeline(async_on=self.async_on)
 
 
@@ -85,7 +85,7 @@ class Requester:
 
     def run(self):
         while self.__graph():
-            logging.info("running requester")
+            logger.info("running requester")
             time.sleep(self.throttle)
 
 def helper_args():
