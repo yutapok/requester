@@ -47,7 +47,8 @@ class Request:
 
 
 class Fetcher:
-    def __init__(self, timeout=30):
+    def __init__(self, ctx=None, timeout=30):
+        self.ctx = ctx
         self.timeout = timeout
 
     def flow(self, requests):

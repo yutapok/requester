@@ -38,9 +38,9 @@ class Requester:
             self.concurrent_num = settings.getint(section, 'concurrent_num')
             self.async_pipeline = settings.getboolean(section, 'async_pipeline')
 
-        self.schedule = schedule or Schedule(ctx=self.ctx, cuncurrent_num=self.concurrent_num)
-        self.fetcher = fetcher or Fetcher()
-        self.pipeline = pipeline or Pipeline(async_on=self.async_on)
+        self.schedule = schedule or Schedule(ctx=self.ctx, concurrent_num=self.concurrent_num)
+        self.fetcher = fetcher or Fetcher(ctx=self.ctx)
+        self.pipeline = pipeline or Pipeline(ctx=self.ctx, async_on=self.async_pipeline)
 
 
     def source_scheduling(self):
