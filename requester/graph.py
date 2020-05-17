@@ -8,11 +8,10 @@ from .http import Request, Fetcher
 
 import logging
 
-formatter = '{"level": %(levelname)s", "timestamp": "%(asctime)s", "contents": %(message)s}'
+formatter = '{"level": %(levelname)s", "timestamp": "%(asctime)s", "place": %(name)s, "contents": %(message)s}'
 logging.basicConfig(format=formatter, level=logging.INFO)
 
 logger = logging.getLogger(__name__)
-
 
 class Requester:
     def __init__(self, ctx=None, settings=None, schedule=None, fetcher=None, pipeline=None):

@@ -1,8 +1,6 @@
 from .http import Request
 
 import logging
-formatter = '{"level": %(levelname)s", "timestamp": "%(asctime)s", "phase": "sink", "contents": %(message)s}'
-logging.basicConfig(format=formatter, level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 

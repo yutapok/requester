@@ -7,8 +7,6 @@ import aiohttp
 
 import logging
 
-formatter = '{"level": %(levelname)s", "timestamp": "%(asctime)s", "phase": "fetcher", "contents": %(message)s}'
-logging.basicConfig(format=formatter, level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 
